@@ -70,7 +70,7 @@ FLOW_SCALE.onFormSubmit = function(condition) {
 FLOW_SCALE.saveData = function(completionCode, condition, csv) {
   var performanceData = FLOW_SCALE.getPerformnaceData();
   var fileToSave = csv + performanceData;
-  var storage = firebase.storage().ref().child(condition).child(completionCode + ".csv").putString(csv).then(function(snapshot) {
+  var storage = firebase.storage().ref().child(condition).child(completionCode + ".csv").putString(fileToSave).then(function(snapshot) {
     console.log('Uploaded a raw string!');
   });
 ;}
