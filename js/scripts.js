@@ -9,7 +9,6 @@ var FLOW_SCALE = FLOW_SCALE || {};
  * @param  {string} condition the experimental condition
  */
 FLOW_SCALE.onFormSubmit = function(condition) {
-  // TODO - submit csv to server
   var completionCode = FLOW_SCALE.getCompletionCode();
   var csv = condition + "," + completionCode + ",";
   var items = 0;
