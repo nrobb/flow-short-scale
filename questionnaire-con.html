@@ -4,6 +4,7 @@
 <head>
   <meta charset="utf-8">
   <title>Questionnaire</title>
+  <script src="https://www.gstatic.com/firebasejs/4.4.0/firebase.js"></script>
   <!--[if lt IE 9]>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
   <![endif]-->
@@ -422,5 +423,16 @@
       <br>available under the Creative Commons Share Alike 3.0 License</p>
   </div>
 </body>
-
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyBvibqP4orxTX80a0ZvVAlRIuWqPRit_RA",
+    authDomain: "flow-experimental-game.firebaseapp.com",
+    databaseURL: "https://flow-experimental-game.firebaseio.com",
+    projectId: "flow-experimental-game",
+    storageBucket: "gs://flow-experimental-game.appspot.com/",
+    messagingSenderId: "210063235098"
+  };
+  firebase.initializeApp(config);
+</script>
 </html>

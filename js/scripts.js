@@ -58,7 +58,7 @@ FLOW_SCALE.onFormSubmit = function(condition) {
     alert("Please answer all items...");
   } else {
     FLOW_SCALE.showCompletionCode(completionCode);
-    FLOW_SCALE.saveData(condition, csv);
+    FLOW_SCALE.saveData(completionCode, condition, csv);
   }
 }
 
@@ -67,21 +67,12 @@ FLOW_SCALE.onFormSubmit = function(condition) {
  *
  * @param  {type} csv the csv file of the participant's responses
  */
-FLOW_SCALE.saveData = function(condition, csv) {
+FLOW_SCALE.saveData = function(completionCode, condition, csv) {
   var performanceData = FLOW_SCALE.getPerformnaceData();
   var fileToSave = csv + performanceData;
-  console.log(fileToSave)
-  switch(condition) {
-    case "dda":
-      //TODO save to the dda database
-      break;
-    case "inc":
-      //TODO save to the inc database
-      break;
-    case "con":
-      //TODO save to the con database
-      break;
-    }
+  var storage = firebase.storage().ref().child(condition).child(completionCode + ".csv").putString(csv).then(function(snapshot) {
+    console.log('Uploaded a raw string!');
+  });
 ;}
 
 /**
@@ -144,6 +135,8 @@ FLOW_SCALE.showCompletionCode = function(completionCode) {
  * @return {type}  description
  */
 FLOW_SCALE.getCompletionCode = function() {
-  //TODO get a completion code from the server
-  return "dummy completion code"
+  var participant = firebase.database().ref().push("completed");
+  var rawCode = participant.getKey();
+  var completionCode = rawCode.slice(1);
+  return completionCode;
 }
