@@ -346,7 +346,7 @@ DDATest.MeteorShower.prototype.endGame = function() {
   this.launch.inputEnabled = true;
   this.launch.events.onInputUp.add(function() {
     this.music.stop();
-    var url = "https://google.com/search?q=" + this.experimentalCondition;
+    var url = "http://game-experiments.org/exp-0917-mturk-only-survey/" + this.experimentalCondition;
     window.location.href = url;
   }, this);
 };
