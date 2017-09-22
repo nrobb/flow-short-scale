@@ -11,7 +11,7 @@ var FLOW_SCALE = FLOW_SCALE || {};
 FLOW_SCALE.onFormSubmit = function(condition) {
   // TODO - submit csv to server
   var completionCode = FLOW_SCALE.getCompletionCode();
-  var csv = completionCode + ",";
+  var csv = condition + "," + completionCode + ",";
   var items = 0;
   // items 1 - 13
   for (var i = 0; i < 91; i++) {
@@ -37,20 +37,25 @@ FLOW_SCALE.onFormSubmit = function(condition) {
       csv += ",";
     }
   }
-  // item 16 (month)
+  // item 16 (weekly game play duration)
   if (document.FKS.i16.value !== "void") {
     items++;
     csv += document.FKS.i16.value;
     csv += ",";
   }
-  // item 17 (year)
+  // item 17 (month)
   if (document.FKS.i17.value !== "void") {
     items++;
     csv += document.FKS.i17.value;
     csv += ",";
   }
-  csv += "\n";
-  if (items != 17) {
+  // item 18 (year)
+  if (document.FKS.i18.value !== "void") {
+    items++;
+    csv += document.FKS.i18.value;
+    csv += ",";
+  }
+  if (items != 18) {
     alert("Please answer all items...");
   } else {
     FLOW_SCALE.showCompletionCode(completionCode);
@@ -65,17 +70,17 @@ FLOW_SCALE.onFormSubmit = function(condition) {
  */
 FLOW_SCALE.saveData = function(condition, csv) {
   var performanceData = FLOW_SCALE.getPerformnaceData();
-  console.log("got some " + performanceData)
-  console.log(csv)
+  var fileToSave = csv + performanceData;
+  console.log(fileToSave)
   switch(condition) {
     case "dda":
-      console.log("condition = dda") //TODO save to the dda database
+      //TODO save to the dda database
       break;
     case "inc":
-      console.log("condition = inc") //TODO save to the inc database
+      //TODO save to the inc database
       break;
     case "con":
-      console.log("condition = con") //TODO save to the con database
+      //TODO save to the con database
       break;
     }
 ;}
@@ -86,7 +91,8 @@ FLOW_SCALE.saveData = function(condition, csv) {
  * @return {string}  the performance data as a .csv file
  */
 FLOW_SCALE.getPerformnaceData = function() {
-  return "dummy performance data"
+  var performanceData = localStorage.getItem("data");
+  return performanceData;
 }
 
 /**
