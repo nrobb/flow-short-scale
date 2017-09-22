@@ -135,7 +135,7 @@ FLOW_SCALE.showCompletionCode = function(completionCode) {
  * @return {type}  description
  */
 FLOW_SCALE.getCompletionCode = function() {
-  var participant = firebase.database().ref().push("completed");
+  var participant = firebase.database().ref("participants").push("completed");
   var rawCode = participant.getKey();
   var completionCode = rawCode.slice(1);
   return completionCode;
