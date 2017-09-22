@@ -1,10 +1,13 @@
 var DDATest = {};
 
 DDATest.Preloader = function(game) {
-
 };
 
 DDATest.Preloader.prototype.preload = function() {
+  // loading message
+  var style = { font: "65px Arial", fill: "#ffffff", align: "center" };
+  var loadingText = this.add.text(this.world.centerX, this.world.centerY, "LOADING...", style);
+  loadingText.anchor.set(0.5, 0.5);
   // Sprites
   this.load.image('player-sprite', 'assets/player-sprite.png');
   this.load.image('particle', 'assets/small-circle.png');

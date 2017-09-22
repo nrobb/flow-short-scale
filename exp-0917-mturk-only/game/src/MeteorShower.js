@@ -208,7 +208,7 @@ DDATest.MeteorShower.prototype.saveData = function(avoidance, collection, player
 DDATest.MeteorShower.prototype.setupExperiemt = function() {
   this.levelInterval();
   switch (this.experimentalCondition) {
-    case "con":
+    case "cont":
       this.velocity = this.CONTROL_VELOCITY;
     break;
     case "dda":
@@ -239,7 +239,7 @@ DDATest.MeteorShower.prototype.runExperiemt = function() {
     this.endGame();
   }
   switch (this.experimentalCondition) {
-    case "con":
+    case "cont":
     break;
     case "dda":
       this.setDDAupdate();
@@ -327,7 +327,7 @@ DDATest.MeteorShower.prototype.setExperimentalCondition = function() {
       this.experimentalCondition = "inc";
       break;
     case 2:
-      this.experimentalCondition = "con";
+      this.experimentalCondition = "cont";
       break;
   }
 };
@@ -346,7 +346,7 @@ DDATest.MeteorShower.prototype.endGame = function() {
   this.launch.inputEnabled = true;
   this.launch.events.onInputUp.add(function() {
     this.music.stop();
-    var url = "http://game-experiments.org/exp-0917-mturk-only-survey/" + this.experimentalCondition;
+    var url = "http://game-experiments.org/exp-0917-mturk-only-survey/" + this.experimentalCondition + ".html";
     window.location.href = url;
   }, this);
 };

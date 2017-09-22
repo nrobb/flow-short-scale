@@ -24,4 +24,7 @@ DDATest.Menu.prototype.create = function() {
   this.add.bitmapText(250, 140, 'carrier-command', 'HITTING A METEOR MEANS YOU LOSE A POINT', 10);
   this. startText = this.add.bitmapText(this.world.centerX, this.world.centerY, 'carrier-command', 'CLICK HERE TO START', 20);
   this.startText.anchor.set(0.5, 0.5);
+  // copyright
+  this.add.bitmapText(250, this.world.height - 130, 'carrier-command', 'COPYRIGHT 2017 NIGEL ROBB', 10);
+  this.add.bitmapText(250, this.world.height - 100, 'carrier-command', 'ALL ASSETS SOURCED FROM PUBLIC DOMAIN', 10);
 };
