@@ -107,6 +107,7 @@ DDATest.MeteorShower.prototype.create = function() {
   localStorage.setItem("data", "");
   this.gameOver = false;
   this.setupExperiemt();
+  this.endGame(); //hack for testing only
 };
 
 DDATest.MeteorShower.prototype.update = function() {
