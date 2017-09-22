@@ -13,6 +13,7 @@ FLOW_SCALE.onFormSubmit = function(condition) {
   var completionCode = FLOW_SCALE.getCompletionCode();
   var csv = completionCode + ",";
   var items = 0;
+  // items 1 - 13
   for (var i = 0; i < 91; i++) {
     if (document.FKS.elements[i].checked == true) {
       items++;
@@ -20,14 +21,36 @@ FLOW_SCALE.onFormSubmit = function(condition) {
       csv += ","
     }
   }
+  // item 14
   for (i = 0; i < 7; i++) {
     if (document.FKS.i14[i].checked == true) {
       items++;
       csv += document.FKS.i14[i].value;
+      csv += ","
     }
   }
+  // item 15 (gender)
+  for (i = 0; i < 2; i++) {
+    if (document.FKS.i15[i].checked == true) {
+      items++;
+      csv += document.FKS.i15[i].value;
+      csv += ",";
+    }
+  }
+  // item 16 (month)
+  if (document.FKS.i16.value !== "void") {
+    items++;
+    csv += document.FKS.i16.value;
+    csv += ",";
+  }
+  // item 17 (year)
+  if (document.FKS.i17.value !== "void") {
+    items++;
+    csv += document.FKS.i17.value;
+    csv += ",";
+  }
   csv += "\n";
-  if (items != 14) {
+  if (items != 17) {
     alert("Please answer all items...");
   } else {
     FLOW_SCALE.showCompletionCode(completionCode);
