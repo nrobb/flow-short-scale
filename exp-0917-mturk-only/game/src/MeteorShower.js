@@ -201,7 +201,7 @@ DDATest.MeteorShower.prototype.resetCount = function() {
 
 DDATest.MeteorShower.prototype.saveData = function(avoidance, collection, playerWasHit, score, velocity) {
   var data = localStorage.getItem("data");
-  data += avoidance + "," + collection + "," + playerWasHit + "," + score + "," + velocity + ",";
+  data += velocity + ",";
   localStorage.setItem("data", data);
 };
 

@@ -77,8 +77,8 @@ FLOW_SCALE.onFormSubmit = function(condition) {
  * @param  {type} csv the csv file of the participant's responses
  */
 FLOW_SCALE.saveData = function(completionCode, condition, csv) {
-  var performanceData = FLOW_SCALE.getPerformnaceData();
-  var fileToSave = completionCode + "," + csv + performanceData;
+  var velocityData = FLOW_SCALE.getVelocityData();
+  var fileToSave = completionCode + "," + csv + velocityData;
   console.log(fileToSave);
   var storage = firebase.storage().ref().child(condition).child(completionCode + ".csv").putString(fileToSave).then(function(snapshot) {
     console.log('Uploaded a raw string!');
@@ -86,13 +86,13 @@ FLOW_SCALE.saveData = function(completionCode, condition, csv) {
 ;}
 
 /**
- * FLOW_SCALE - gets the participant's performance data from localStorage
+ * FLOW_SCALE - gets the participant's velocity data from localStorage (DDA only)
  *
- * @return {string}  the performance data as a .csv file
+ * @return {string}  the velocuty data as a .csv file
  */
-FLOW_SCALE.getPerformnaceData = function() {
-  var performanceData = localStorage.getItem("data");
-  return performanceData;
+FLOW_SCALE.getVelocityData = function() {
+  var velocityData = localStorage.getItem("data");
+  return velocityData;
 }
 
 /**
