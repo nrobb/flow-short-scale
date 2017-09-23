@@ -28,33 +28,42 @@ FLOW_SCALE.onFormSubmit = function(condition) {
       csv += ","
     }
   }
-  // item 15 (gender)
-  for (i = 0; i < 2; i++) {
+  // item 15
+  for (i = 0; i < 7; i++) {
     if (document.FKS.i15[i].checked == true) {
       items++;
       csv += document.FKS.i15[i].value;
+      csv += ","
+    }
+  }
+  // item 16 (gender)
+  for (i = 0; i < 2; i++) {
+    if (document.FKS.i16[i].checked == true) {
+      items++;
+      csv += document.FKS.i16[i].value;
       csv += ",";
     }
   }
-  // item 16 (weekly game play duration)
-  if (document.FKS.i16.value !== "void") {
-    items++;
-    csv += document.FKS.i16.value;
-    csv += ",";
-  }
-  // item 17 (month)
+  // item 17 (weekly game play duration)
   if (document.FKS.i17.value !== "void") {
     items++;
     csv += document.FKS.i17.value;
     csv += ",";
   }
-  // item 18 (year)
+  // item 18 (month)
   if (document.FKS.i18.value !== "void") {
     items++;
     csv += document.FKS.i18.value;
     csv += ",";
   }
-  if (items != 18) {
+  // item 19 (year)
+  if (document.FKS.i19.value !== "void") {
+    items++;
+    csv += document.FKS.i19.value;
+    csv += ",";
+  }
+  if (items != 19) {
+    console.log(items)
     alert("Please answer all items...");
   } else {
     FLOW_SCALE.showCompletionCode(completionCode);
@@ -70,6 +79,7 @@ FLOW_SCALE.onFormSubmit = function(condition) {
 FLOW_SCALE.saveData = function(completionCode, condition, csv) {
   var performanceData = FLOW_SCALE.getPerformnaceData();
   var fileToSave = csv + performanceData;
+  console.log(fileToSave);
   var storage = firebase.storage().ref().child(condition).child(completionCode + ".csv").putString(fileToSave).then(function(snapshot) {
     console.log('Uploaded a raw string!');
   });
