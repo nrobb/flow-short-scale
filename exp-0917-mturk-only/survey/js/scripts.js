@@ -9,8 +9,7 @@ var FLOW_SCALE = FLOW_SCALE || {};
  * @param  {string} condition the experimental condition
  */
 FLOW_SCALE.onFormSubmit = function(condition) {
-  var completionCode = FLOW_SCALE.getCompletionCode();
-  var csv = condition + "," + completionCode + ",";
+  var csv = condition + ",";
   var items = 0;
   // items 1 - 13
   for (var i = 0; i < 91; i++) {
@@ -66,6 +65,7 @@ FLOW_SCALE.onFormSubmit = function(condition) {
     console.log(items)
     alert("Please answer all items...");
   } else {
+    var completionCode = FLOW_SCALE.getCompletionCode();
     FLOW_SCALE.showCompletionCode(completionCode);
     FLOW_SCALE.saveData(completionCode, condition, csv);
   }
@@ -78,7 +78,7 @@ FLOW_SCALE.onFormSubmit = function(condition) {
  */
 FLOW_SCALE.saveData = function(completionCode, condition, csv) {
   var performanceData = FLOW_SCALE.getPerformnaceData();
-  var fileToSave = csv + performanceData;
+  var fileToSave = completionCode + "," + csv + performanceData;
   console.log(fileToSave);
   var storage = firebase.storage().ref().child(condition).child(completionCode + ".csv").putString(fileToSave).then(function(snapshot) {
     console.log('Uploaded a raw string!');
@@ -145,7 +145,7 @@ FLOW_SCALE.showCompletionCode = function(completionCode) {
  * @return {type}  description
  */
 FLOW_SCALE.getCompletionCode = function() {
-  var participant = firebase.database().ref("participants").push("completed");
+  var participant = firebase.database().ref("participants").push("code requested");
   var rawCode = participant.getKey();
   var completionCode = rawCode.slice(1);
   return completionCode;
