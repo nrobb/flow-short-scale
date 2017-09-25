@@ -79,21 +79,37 @@ FLOW_SCALE.onFormSubmit = function(condition) {
  */
 FLOW_SCALE.saveData = function(completionCode, condition, csv) {
   var velocityData = FLOW_SCALE.getVelocityData();
-  var fileToSave = completionCode + "," + csv + velocityData;
-  console.log(fileToSave);
-  var storage = firebase.storage().ref().child(condition).child(completionCode + ".csv").putString(fileToSave).then(function(snapshot) {
-    console.log('Uploaded a raw string!');
+  var scoreData = FLOW_SCALE.getScoreData();
+  var scoreDataFile = completionCode + "," + csv + scoreData;
+  var velocityDataFile = completionCode + "," + velocityData;
+  firebase.storage().ref().child(condition).child(completionCode + ".csv").putString(scoreDataFile).then(function(snapshot) {
+    console.log(scoreDataFile);
   });
+  if (velocityData) {
+    firebase.storage().ref().child("velocityData").child(completionCode + ".csv").putString(velocityDataFile).then(function(snapshot) {
+      console.log(velocityDataFile);
+    });
+  }
 ;}
 
 /**
- * FLOW_SCALE - gets the participant's velocity data from localStorage (DDA only)
+ * FLOW_SCALE.getVelocityData - gets the participant's velocity data from localStorage (DDA only)
  *
- * @return {string}  the velocuty data as a .csv file
+ * @return {string}  the velocity data as a .csv file
  */
 FLOW_SCALE.getVelocityData = function() {
-  var velocityData = localStorage.getItem("data");
+  var velocityData = localStorage.getItem("velocities");
   return velocityData;
+}
+
+/**
+ * FLOW_SCALE.getScoreData - gets the participant's velocity data from localStorage (DDA only)
+ *
+ * @return {string}  the score data as a .csv file
+ */
+FLOW_SCALE.getScoreData = function() {
+  var scoreData = localStorage.getItem("score");
+  return scoreData;
 }
 
 /**
@@ -146,7 +162,9 @@ FLOW_SCALE.showCompletionCode = function(completionCode) {
  * @return {type}  description
  */
 FLOW_SCALE.getCompletionCode = function() {
-  var participant = firebase.database().ref("participants").push("code requested");
+  var date = new Date();
+  var participant = firebase.database().ref("participants").push(date.toUTCString());
+  console.log(date.toUTCString());
   var rawCode = participant.getKey();
   var completionCode = rawCode.slice(1);
   return completionCode;

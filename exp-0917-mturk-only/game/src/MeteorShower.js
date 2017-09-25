@@ -104,7 +104,8 @@ DDATest.MeteorShower.prototype.create = function() {
   // dda
   this.dda = new POSM.Posm();
   // start
-  localStorage.setItem("data", "");
+  localStorage.setItem("score", "");
+  localStorage.setItem("velocities", "");
   this.gameOver = false;
   this.setupExperiemt();
 };
@@ -190,7 +191,7 @@ DDATest.MeteorShower.prototype.setVelocity = function() {
   } else {
     this.velocity = this.dda.update('velocity', POSM.TOO_EASY);
   }
-  this.saveData(avoidance, collection, this.playerWasHit, this.score, this.velocity);
+  this.saveVelocity(this.velocity);
   this.resetCount();
 };
 
@@ -199,10 +200,18 @@ DDATest.MeteorShower.prototype.resetCount = function() {
   this.numberOfBalls = 0;
 };
 
-DDATest.MeteorShower.prototype.saveData = function(avoidance, collection, playerWasHit, score, velocity) {
-  var data = localStorage.getItem("data");
-  data += velocity + ",";
-  localStorage.setItem("data", data);
+DDATest.MeteorShower.prototype.saveVelocity = function(velocity) {
+  var velocities = localStorage.getItem("velocities");
+  velocities += velocity + ",";
+  localStorage.setItem("velocities", velocities);
+  console.log(velocities)
+};
+
+DDATest.MeteorShower.prototype.saveScore = function(newScore) {
+  var score = localStorage.getItem("score");
+  score += newScore + ",";
+  localStorage.setItem("score", score);
+  console.log(score)
 };
 
 DDATest.MeteorShower.prototype.setupExperiemt = function() {
@@ -297,6 +306,7 @@ DDATest.MeteorShower.prototype.displayMessages = function() {
 };
 
 DDATest.MeteorShower.prototype.levelInterval = function() {
+  this.saveScore(this.score);
   this.setScores();
   this.level++;
   this.star.kill();
