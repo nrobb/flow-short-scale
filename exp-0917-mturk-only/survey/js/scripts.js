@@ -11,10 +11,11 @@ var FLOW_SCALE = FLOW_SCALE || {};
 FLOW_SCALE.onFormSubmit = function(condition) {
   var csv = condition + ",";
   var items = 0;
-  // items 1 - 13
-  for (var i = 0; i < 91; i++) {
+  // items 1 - 13 (including two dummy questions)
+  for (var i = 0; i < 105; i++) {
     if (document.FKS.elements[i].checked == true) {
       items++;
+      console.log(document.FKS.elements[i].value)
       csv += document.FKS.elements[i].value;
       csv += ","
     }
@@ -61,7 +62,7 @@ FLOW_SCALE.onFormSubmit = function(condition) {
     csv += document.FKS.i19.value;
     csv += ",";
   }
-  if (items != 19) {
+  if (items != 21) {
     console.log(items)
     alert("Please answer all items...");
   } else {
