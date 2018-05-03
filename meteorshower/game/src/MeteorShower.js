@@ -328,7 +328,13 @@ DDATest.MeteorShower.prototype.startNewLevel = function() {
 };
 
 DDATest.MeteorShower.prototype.setExperimentalCondition = function() {
-  var rnd = this.rnd.integerInRange(0, 2);
+  // CHOICE
+
+  // set random condition CURRENTLY DISABLED
+  //var rnd = this.rnd.integerInRange(0, 2);
+
+  //always use DDA condiction CURRENTLY ENABLED
+  var rnd = 0;
   switch(rnd) {
     case 0:
       this.experimentalCondition = "dda";
@@ -340,6 +346,7 @@ DDATest.MeteorShower.prototype.setExperimentalCondition = function() {
       this.experimentalCondition = "cont";
       break;
   }
+  console.log(this.experimentalCondition)
 };
 
 DDATest.MeteorShower.prototype.endGame = function() {
@@ -350,7 +357,15 @@ DDATest.MeteorShower.prototype.endGame = function() {
   this.successAudio.play();
   // show the cursor
   document.getElementById("gameContainer").style.cursor = "default";
-  // show the button
+
+  // CHOICE:
+
+  // 1. go straight back to the menu screen CURRENTLY ENABLED
+  this.state.start('Menu');
+  this.music.stop();
+
+  /*
+  // 2. show the button to go to the survey CURRENTLY DISABLED
   this.launch = this.add.image(this.world.centerX, this.world.centerY, 'launch-survey');
   this.launch.anchor.set(0.5, 0.5);
   this.launch.inputEnabled = true;
@@ -359,4 +374,5 @@ DDATest.MeteorShower.prototype.endGame = function() {
     var url = "http://game-experiments.org/exp-0917-mturk-only/survey/" + this.experimentalCondition + ".html";
     window.location.href = url;
   }, this);
+  */
 };
