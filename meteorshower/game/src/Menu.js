@@ -17,7 +17,7 @@ DDATest.Menu.prototype.create = function() {
     this.state.start('MeteorShower');
   }, this);
   // instructions
-  this.add.bitmapText(300, 20, 'carrier-command', 'METEOR SHOWER', 20);
+  this.add.bitmapText(350, 20, 'carrier-command', 'METEOR SHOWER', 20);
   this.add.bitmapText(250, 80, 'carrier-command', 'USE THE LEFT AND RIGHT ARROWS TO MOVE', 10);
   this.add.bitmapText(250, 110, 'carrier-command', 'GET 1 POINT FOR EVERY STAR YOU CAN CATCH', 10);
   this.add.bitmapText(250, 140, 'carrier-command', 'AVOID THE METEORS!!', 10);
